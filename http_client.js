@@ -38,10 +38,8 @@ export class TMD67Client {
         DEBUG('GET:', url, _conf);
         return this.session.get(url, _conf).then((res => res.data))
             .catch(function (error) {
-                if (CONF.debug_) {
-                    DEBUG("[Response.data]", error.response && error.response.data)
-                    DEBUG("[ERROR-message]", error.message)
-                }
+                DEBUG("[Response.data]", error.response && error.response.data)
+                DEBUG("[ERROR-message]", error.message)
                 throw error;
             });
     }
@@ -52,10 +50,8 @@ export class TMD67Client {
         DEBUG('POST:', url, body, _conf);
         return this.session.post(url, body, _conf).then((res => res.data))
             .catch(function (error) {
-                if (CONF.debug_) {
-                    DEBUG("[Response.data]", error.response && error.response.data)
-                    DEBUG("[ERROR-message]", error.message)
-                }
+                DEBUG("[Response.data]", error.response && error.response.data)
+                DEBUG("[ERROR-message]", error.message)
                 throw error;
             });
     }
@@ -66,10 +62,8 @@ export class TMD67Client {
         DEBUG('PUT:', url, body, _conf);
         return this.session.put(url, body, _conf).then((res => res.data))
             .catch(function (error) {
-                if (CONF.debug_) {
-                    DEBUG("[Response.data]", error.response && error.response.data)
-                    DEBUG("[ERROR-message]", error.message)
-                }
+                DEBUG("[Response.data]", error.response && error.response.data)
+                DEBUG("[ERROR-message]", error.message)
                 throw error;
             });
     }
@@ -80,10 +74,8 @@ export class TMD67Client {
         DEBUG('PATCH:', url, body, _conf);
         return this.session.patch(url, body, _conf).then((res => res.data))
             .catch(function (error) {
-                if (CONF.debug_) {
-                    DEBUG("[Response.data]", error.response && error.response.data)
-                    DEBUG("[ERROR-message]", error.message)
-                }
+                DEBUG("[Response.data]", error.response && error.response.data)
+                DEBUG("[ERROR-message]", error.message)
                 throw error;
             });
     }
@@ -94,10 +86,8 @@ export class TMD67Client {
         DEBUG('DELETE:', url)
         return this.session.delete(url, _conf).then((res => res.data))
             .catch(function (error) {
-                if (CONF.debug_) {
-                    DEBUG("[Response.data]", error.response && error.response.data)
-                    DEBUG("[ERROR-message]", error.message)
-                }
+                DEBUG("[Response.data]", error.response && error.response.data)
+                DEBUG("[ERROR-message]", error.message)
                 throw error;
             });
     }
