@@ -29,26 +29,26 @@ export class User extends TMD67Client {
         return await this._post(url, body, Object.assign({ headers: { 'X-CSRFTOKEN': csrfToken } }, this.conf));
     }
 
-    async user_directory(conf = {}) {
+    async user_directory() {
         let url = `${this._buildBaseURL()}/user-directory/`;
-        return this._get(url, conf);
+        return this._get(url);
     }
 }
 
 
 export class UserService {
 
-    _to_internal(input, extra = {}) {
-        return input;
+    _to_internal(payload, extra = {}) {
+        return payload;
     }
 
     _to_represent(instance, extra = {}) {
         return instance;
     }
 
-    async user_register(body, conf = CONF) {
+    async user_register(payload) {
         try {
-            const instance = await new User().user_register(url, this._to_internal(payload));
+            const instance = await new User().user_register(this._to_internal(payload));
             return this._to_represent(instance);
         } catch (error) {
             // UI show an error message to the user
@@ -79,8 +79,6 @@ export class UserService {
             // UI redirect the user to the order's dashboard
             return profile
         } catch (error) {
-            console.log(error)
-
             console.error('Login failed!');
             // UI show an error message to the user
             return {

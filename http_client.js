@@ -12,9 +12,7 @@ export var CONF = {
 
 export function DEBUG(...msgs) {
     if (CONF.debug_)
-        console.dir(">>>>>>>>>>")
-    console.dir(msgs, { depth: null })
-    console.dir("<<<<<<<<<<")
+        console.dir(msgs, { depth: null })
 }
 
 
@@ -35,8 +33,10 @@ export class TMD67Client {
     }
 
     async _get(url, conf = {}) {
-        DEBUG('GET:', url, conf);
-        return this.session.get(url, conf).then((res => res.data))
+        const _conf = Object.assign({ params: {} }, this.conf, conf)
+        DEBUG(">>>>>>>>>>")
+        DEBUG('GET:', url, _conf);
+        return this.session.get(url, _conf).then((res => res.data))
             .catch(function (error) {
                 if (CONF.debug_) {
                     DEBUG("[Response.data]", error.response && error.response.data)
@@ -47,8 +47,10 @@ export class TMD67Client {
     }
 
     async _post(url, body, conf = {}) {
-        DEBUG('POST:', url, body, conf);
-        return this.session.post(url, body, conf).then((res => res.data))
+        const _conf = Object.assign({}, this.conf, conf)
+        DEBUG(">>>>>>>>>>")
+        DEBUG('POST:', url, body, _conf);
+        return this.session.post(url, body, _conf).then((res => res.data))
             .catch(function (error) {
                 if (CONF.debug_) {
                     DEBUG("[Response.data]", error.response && error.response.data)
@@ -59,8 +61,10 @@ export class TMD67Client {
     }
 
     async _put(url, body, conf = {}) {
-        DEBUG('PUT:', url, body, conf);
-        return this.session.put(url, body, conf).then((res => res.data))
+        const _conf = Object.assign({}, this.conf, conf)
+        DEBUG(">>>>>>>>>>")
+        DEBUG('PUT:', url, body, _conf);
+        return this.session.put(url, body, _conf).then((res => res.data))
             .catch(function (error) {
                 if (CONF.debug_) {
                     DEBUG("[Response.data]", error.response && error.response.data)
@@ -71,8 +75,10 @@ export class TMD67Client {
     }
 
     async _patch(url, body, conf = {}) {
-        DEBUG('PATCH:', url, body, conf);
-        return this.session.patch(url, body, conf).then((res => res.data))
+        const _conf = Object.assign({}, this.conf, conf)
+        DEBUG(">>>>>>>>>>")
+        DEBUG('PATCH:', url, body, _conf);
+        return this.session.patch(url, body, _conf).then((res => res.data))
             .catch(function (error) {
                 if (CONF.debug_) {
                     DEBUG("[Response.data]", error.response && error.response.data)
@@ -83,8 +89,10 @@ export class TMD67Client {
     }
 
     async _delete(url, conf = {}) {
+        const _conf = Object.assign({}, this.conf, conf)
+        DEBUG(">>>>>>>>>>")
         DEBUG('DELETE:', url)
-        return this.session.delete(url, conf).then((res => res.data))
+        return this.session.delete(url, _conf).then((res => res.data))
             .catch(function (error) {
                 if (CONF.debug_) {
                     DEBUG("[Response.data]", error.response && error.response.data)
@@ -96,34 +104,33 @@ export class TMD67Client {
 
     static to_pagenation(params = {}) {
         return {
-            "page": params["page_number"] || 1,
+            "page": params["page"],
         };
     }
 
-    async list(conf = {}) {
-        let url = this._build_resource_path(conf);
-        let _conf = Object.assign({ params: {} }, this.conf, conf)
-        Object.assign(_conf.params, TMD67Client.to_pagenation(conf.params))
-        return this._get(url, _conf);
+    async list(conf = { params: {} }) {
+        let url = this._build_resource_path();
+        Object.assign(conf.params, TMD67Client.to_pagenation(conf.params))
+        return this._get(url, conf);
     }
 
     async retrieve(instance, conf = {}) {
         let url = this._build_retrieve_path(instance)
-        return this._get(url, instance, Object.assign({}, this.conf, conf));
+        return this._get(url, instance, conf);
     }
 
     async create(body, conf = {}) {
-        let url = this._build_resource_path(body);
-        return this._post(url, body, Object.assign({}, this.conf, conf));
+        let url = this._build_resource_path();
+        return this._post(url, body, conf);
     }
 
     async update(instance, conf = {}) {
         let url = this._build_retrieve_path(instance);
-        return this._patch(url, instance, Object.assign({}, this.conf, conf));
+        return this._patch(url, instance, conf);
     }
 
     async delete(instance, conf = {}) {
         let url = this._build_retrieve_path(instance);
-        return this._delete(url, instance, Object.assign({}, this.conf, conf));
+        return this._delete(url, instance, conf);
     }
 }

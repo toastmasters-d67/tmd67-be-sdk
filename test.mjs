@@ -8,7 +8,7 @@ CONF.path_ = ''
 CONF.debug_ = true
 CONF.headers = {
     'X-CSRFTOKEN': 'Nx0OJjjv7rdKOz9R9zYPULhxSqvdiYaBhIAqzlyOZifVyGqxbxc4PI13RQyUZzIO',
-    'Cookie': 'csrftoken=Nx0OJjjv7rdKOz9R9zYPULhxSqvdiYaBhIAqzlyOZifVyGqxbxc4PI13RQyUZzIO; sessionid=nyj30uldwxtajx9yt0ejn2eomirorr9n',
+    'Cookie': 'csrftoken=Nx0OJjjv7rdKOz9R9zYPULhxSqvdiYaBhIAqzlyOZifVyGqxbxc4PI13RQyUZzIO; sessionid=us2eacc2f4cr4ijiogrdptpuyjhbfgrc',
 }
 
 
@@ -18,6 +18,15 @@ async function main() {
     /*
         test Identity APIs
     */
+    // // I000. test user login
+    // result = await new UserService().user_register(
+    //     {
+    //         email: 'fofx@outlook.com',
+    //         password: 'cwb+123',
+    //     }
+    // );
+    // console.log(result);
+
     // I001. test user login
     result = await new UserService().user_login(
         {
