@@ -98,9 +98,10 @@ export class TMD67Client {
         };
     }
 
-    async list(conf = { params: {} }) {
+    async list(conf = {}) {
         let url = this._build_resource_path();
-        Object.assign(conf.params, TMD67Client.to_pagenation(conf.params))
+        let _conf = Object.assign({params: {}}, conf)
+        Object.assign(_conf.params, TMD67Client.to_pagenation(conf.params))
         return this._get(url, conf);
     }
 

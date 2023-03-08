@@ -29,9 +29,9 @@ export class User extends TMD67Client {
         return await this._post(url, body, Object.assign({ headers: { 'X-CSRFTOKEN': csrfToken } }, this.conf));
     }
 
-    async user_directory() {
+    async user_directory(conf = {}) {
         let url = `${this._build_base_url()}/user-directory/`;
-        return this._get(url);
+        return this._get(url, conf);
     }
 }
 
@@ -89,9 +89,9 @@ export class UserService {
         }
     }
 
-    async user_directory() {
+    async user_directory(conf = {}) {
         try {
-            const instance = await new User().user_directory()
+            const instance = await new User().user_directory(conf)
             return this._to_represent(instance)
         } catch (error) {
             // UI show an error message to the user
