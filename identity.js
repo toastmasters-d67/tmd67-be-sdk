@@ -1,7 +1,7 @@
 import { TMD67Client, CONF } from './http_client.js'
 
 
-export class User extends TMD67Client {
+class User extends TMD67Client {
     constructor() {
         super();
     }
