@@ -36,7 +36,7 @@ class User extends TMD67Client {
 }
 
 
-export class UserService {
+export class UserUsecase {
 
     _to_internal(payload, extra = {}) {
         return payload;

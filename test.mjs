@@ -1,5 +1,5 @@
 import { CONF } from './http_client.mjs'
-import { UserService } from './identity.mjs'
+import { UserUsecase } from './identity.mjs'
 import { TicketProduct, Ticket, Order } from './order.mjs'
 
 
@@ -19,7 +19,7 @@ async function main() {
         test Identity APIs
     */
     // I000. test user register
-    result = await new UserService().user_register(
+    result = await new UserUsecase().user_register(
         {
             email: 'fofx@outlook.com',
             password: 'cwb+123',
@@ -28,7 +28,7 @@ async function main() {
     console.log(result);
 
     // I001. test user login
-    result = await new UserService().user_login(
+    result = await new UserUsecase().user_login(
         {
             email: 'fofx@outlook.com',
             password: 'cwb+123',
@@ -37,7 +37,7 @@ async function main() {
     console.log(result);
 
     // I002. test get user profile
-    result = await new UserService().user_directory();
+    result = await new UserUsecase().user_directory();
     console.log(result);
 
 
