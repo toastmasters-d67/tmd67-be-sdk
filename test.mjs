@@ -18,14 +18,14 @@ async function main() {
     /*
         test Identity APIs
     */
-    // // I000. test user login
-    // result = await new UserService().user_register(
-    //     {
-    //         email: 'fofx@outlook.com',
-    //         password: 'cwb+123',
-    //     }
-    // );
-    // console.log(result);
+    // I000. test user register
+    result = await new UserService().user_register(
+        {
+            email: 'fofx@outlook.com',
+            password: 'cwb+123',
+        }
+    );
+    console.log(result);
 
     // I001. test user login
     result = await new UserService().user_login(
@@ -143,7 +143,7 @@ async function main() {
     );
     console.log(result);
 
-    // O011. delete this ticket
+    // O011. delete this order
     result = await new Order().delete(
         { id: order_instance.id }
     );
