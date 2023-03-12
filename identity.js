@@ -1,17 +1,17 @@
 import { TMD67Client, CONF } from './http_client.js'
 
 
-export class User extends TMD67Client {
+class User extends TMD67Client {
     constructor() {
         super();
     }
 
-    _buildBaseURL() {
+    _build_base_url() {
         return CONF.path_.length > 0 ? `${CONF.origin_}/${CONF.path_}` : `${CONF.origin_}`;
     }
 
     async user_register(body) {
-        const url = `${this._buildBaseURL()}/user-register/`;
+        const url = `${this._build_base_url()}/user-register/`;
         return this._post(url, body);
     }
 
@@ -21,34 +21,34 @@ export class User extends TMD67Client {
         The CSRF token is set by the backend server in a cookie when the user first visits the server.
         It's then sent back to the server on subsequent requests to verify that the request is legitimate.
         */
-        url = `${this._buildBaseURL()}/csrf-token/`;
+        url = `${this._build_base_url()}/csrf-token/`;
         const csrfToken = (await this._get(url)).csrftoken;
 
         // submit user credentials
-        url = `${this._buildBaseURL()}/user-login/`
+        url = `${this._build_base_url()}/user-login/`
         return await this._post(url, body, Object.assign({ headers: { 'X-CSRFTOKEN': csrfToken } }, this.conf));
     }
 
     async user_directory(conf = {}) {
-        let url = `${this._buildBaseURL()}/user-directory/`;
+        let url = `${this._build_base_url()}/user-directory/`;
         return this._get(url, conf);
     }
 }
 
 
-export class UserService {
+export class UserUsecase {
 
-    _to_internal(input, extra = {}) {
-        return input;
+    _to_internal(payload, extra = {}) {
+        return payload;
     }
 
     _to_represent(instance, extra = {}) {
         return instance;
     }
 
-    async user_register(body, conf = CONF) {
+    async user_register(payload) {
         try {
-            const instance = await new User().user_register(url, this._to_internal(payload));
+            const instance = await new User().user_register(this._to_internal(payload));
             return this._to_represent(instance);
         } catch (error) {
             // UI show an error message to the user
@@ -79,8 +79,6 @@ export class UserService {
             // UI redirect the user to the order's dashboard
             return profile
         } catch (error) {
-            console.log(error)
-
             console.error('Login failed!');
             // UI show an error message to the user
             return {
@@ -91,9 +89,9 @@ export class UserService {
         }
     }
 
-    async user_directory() {
+    async user_directory(conf = {}) {
         try {
-            const instance = await new User().user_directory()
+            const instance = await new User().user_directory(conf)
             return this._to_represent(instance)
         } catch (error) {
             // UI show an error message to the user
